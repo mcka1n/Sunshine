@@ -35,6 +35,8 @@ import java.util.Date;
  */
 public class ForecastFragment extends Fragment {
 
+    private ArrayAdapter<String> mForecastAdapter;
+
     public ForecastFragment() {
     }
 
@@ -80,11 +82,10 @@ public class ForecastFragment extends Fragment {
                 "Sun - Sunny - 80/68"
         };
 
-        List<String> weekForecast = new ArrayList<String>(
-                Arrays.asList(forecastArray));
+        List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
 
         // Adapter for my fake data
-        ArrayAdapter<String> mForecastAdapter =
+        mForecastAdapter =
                 new ArrayAdapter<String>(
                   // The current context (this fragment's parent activity)
                   getActivity(),
@@ -287,6 +288,16 @@ public class ForecastFragment extends Fragment {
 
             return null;
         }
-    } // FetchWeatherTask
 
+        @Override
+        protected void onPostExecute(String[] result) {
+            if (result != null){
+                mForecastAdapter.clear();
+                for (String dayForecastStr : result){
+                    mForecastAdapter.add(dayForecastStr);
+                }
+            }
+        }
+
+    } // FetchWeatherTask
 }
