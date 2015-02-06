@@ -115,6 +115,7 @@ public class ForecastFragment extends Fragment {
 
                 String forecast = mForecastAdapter.getItem(position);
                 Toast.makeText(getActivity(), forecast, Toast.LENGTH_SHORT).show();
+
             }
         });
 
